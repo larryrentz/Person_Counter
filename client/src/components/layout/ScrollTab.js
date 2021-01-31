@@ -37,6 +37,7 @@ export default function ScrollTab({metrics}) {
                 aria-label="scrollable auto tabs example"
             >
                 <Tab label="Top" href="#top"></Tab>
+                <Tab label="Join Queue" href="#form"></Tab>
                 {metrics.map((metric) => {
                     return (
                         <Tab label={metric.name} />

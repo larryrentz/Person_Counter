@@ -1,6 +1,6 @@
 import React ,{ useState } from 'react'
 
-import { Grid, Card, CardHeader, CardContent, FormGroup, FormControl, InputLabel, Input, FormHelperText, TextField, Typography } from '@material-ui/core'
+import { Grid, Card, CardHeader, CardContent, FormGroup, FormControl, InputLabel, Input, FormHelperText, TextField, Typography, CircularProgress, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles({
@@ -15,11 +15,15 @@ const useStyles = makeStyles({
         margin: 'auto',
     },
     input:{
+        marginBottom: '16px',
+        fontSize: '20px'
+    },
+    progressBar:{
         
     }
 });
 
-function QueueForm({inQueue}) {
+function QueueForm({inQueue, submitForm}) {
     const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [message, setMessage] = useState("Complete to join queue");
@@ -45,26 +49,43 @@ function QueueForm({inQueue}) {
         
         
     }
-    
+    const isInQueue = (inQueue) => {
+        if(inQueue){
+           return(
+               <React.Fragment>
+                   <CardHeader
+                       title={message}
+                       titleTypographyProps={{ variant: "h5" }}
+                       style={{ marginBottom: "16px" }}
+                   />
+                   <FormGroup id="form" className={classes.formGroup}>
+                       <TextField required id="name" label="Name" className={classes.input} variant="outlined" onChange={(e) => onChange(e)} />
+                       <TextField required id="number" label="Phone Number" className={classes.input} variant="outlined" onChange={(e) => onChange(e)} />
+                       <Button href="#top" variant="contained" style={{marginBottom: '16px'}} onClick={() => submitForm(name, phoneNumber)}>Join</Button>
+                       <Typography variant="caption">Complete to continue</Typography>
+                   </FormGroup>
+               </React.Fragment>
+           ) 
+        }
+        else{
+            return(
+                <Grid container justify="center" direction="column">
+                    <Grid item>
+                        <CircularProgress className={classes.progressBar} variant="determinate" value={85} position="static"/>
+                    </Grid>
+                    <Grid item>
+                        <Typography>Here is where you are in the queue.</Typography>
+                    </Grid>
+                </Grid>
+            )
+        }
+        
+    }
     const classes = useStyles();
     return (
         <Card className={classes.root}>  
             <CardContent>
-                <CardHeader
-                    title={message}
-                />
-                <FormGroup className={classes.formGroup}>
-                    <FormControl style={{marginBottom: '16px'}} >
-                        <InputLabel htmlFor="my-input">Name</InputLabel>
-                        <Input id="name" className={classes.input} variant="outlined" aria-describedby="my-helper-text" onChange={(e) => onChange(e)}/>
-                        <FormHelperText id="my-helper-text">First and Last name</FormHelperText>
-                    </FormControl>
-                    <FormControl>
-                        <InputLabel htmlFor="my-input">Phone Number</InputLabel>
-                        <Input id="number" className={classes.input} variant="outlined" aria-describedby="my-helper-text" onChange={(e) => onChange(e)}/>
-                        <FormHelperText id="my-helper-text">A good number to contact you at</FormHelperText>
-                    </FormControl>
-                </FormGroup>
+                {isInQueue(true)}
             </CardContent>
         </Card>
     )

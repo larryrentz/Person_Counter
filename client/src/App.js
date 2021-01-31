@@ -74,9 +74,26 @@ function App() {
     ]
   );
   const [inQueue, setInQueue] = useState(false);
+  const [person, setPerson] = useState({name: "", number: ""});
   const toggleQueueStatus = () =>{
-    setInQueue(!inQueue);
-    console.log('QueueStatus', inQueue)
+    if (person.name != "" && person.number != ""){
+      setInQueue(!inQueue);
+      console.log('QueueStatus', !inQueue)
+    }
+    else{
+      console.log('QueueStatus', inQueue)
+    }
+    
+  }
+  const submitForm = (name, number) => {
+    if (name != "" && number != "") {
+      setPerson({ name: name, number: number });
+      setInQueue(true);
+      console.log(person);
+    }
+    else {
+      console.log("Failed to submit");
+    }
   }
   const classes = useStyles();
   return(
@@ -84,7 +101,7 @@ function App() {
       <Grid container className={classes.root} direction="column">
         <Grid item>
           
-          <MainAppBar id="top" className={classes.mainAppBar} inQueue={inQueue} toggleQueueStatus={toggleQueueStatus}/>
+          <MainAppBar id="top" className={classes.mainAppBar} inQueue={inQueue} submitForm={submitForm} toggleQueueStatus={toggleQueueStatus}/>
           
         </Grid>
         <Grid item className={classes.navBar}>
@@ -94,7 +111,7 @@ function App() {
         </Grid>
         <Grid container item className={classes.content} alignItems="stretch" justify="center">
           
-          <ScrollView  metrics={metrics}/>
+          <ScrollView  metrics={metrics} submitForm={submitForm}/>
           
         </Grid>
       </Grid>

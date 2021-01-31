@@ -25,13 +25,13 @@ function MainAppBar({inQueue, toggleQueueStatus}) {
     const isInQueue = (inQueue) => {
         let color = "";
         let text = ""
-        if(!inQueue){
+        if(inQueue){
             color = "primary";
             text = "In Queue"
         }
         return(
-            <Fab className={classes.fab} color={color} variant="rounded" onClick={toggleQueueStatus}>
-                <PersonAdd/>
+            <Fab className={classes.fab} color={color} variant="rounded" onClick={toggleQueueStatus}disabled>
+                <PersonAdd href="#form"/>
                 <Typography>{text}</Typography>
             </Fab>
         )
