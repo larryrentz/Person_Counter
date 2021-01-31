@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import ScrollTab from './ScrollTab'
 import { Fab, Button, IconButton, Typography, AppBar, Toolbar, Grid } from '@material-ui/core';
 import { Schedule, Timelapse, Group } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles'
@@ -7,23 +6,24 @@ import { makeStyles } from '@material-ui/styles'
 const useStyles = makeStyles({
     root: {
         background: '#e8e8e8',
-        // padding: '5px',
-        paddingBottom: '16px',
+        paddingTop: '16px',
         boxShadow: 'None',
-        // overflowY: 'visible',
-        maxWidth: '100vw'
+        overflowX: 'hidden',
+        maxWidth: '100vw',
+        margin: 'auto',
+        
     },
     fab: {
         borderRadius: '50px',
         background: 'linear - gradient(145deg, #f8f8f8, #d1d1d1)',
-        boxShadow: '9px 9px 18px #9e9e9e, -4px -4px 16px #ffffff'
+        boxShadow: '9px 9px 18px #9e9e9e, -4px -4px 16px #ffffff',
     },
 });
 
 function MainAppBar({metrics}) {
     const classes = useStyles();
     return (
-        <AppBar className={classes.root} position="sticky">
+        <AppBar className={classes.root} position="static">
             <Toolbar style={{marginBottom: '20px'}}>
                 <Grid container justify="space-between" alignItems="center">
                     <Grid item>
@@ -42,9 +42,6 @@ function MainAppBar({metrics}) {
                         </Fab>
                     </Grid>
                 </Grid>
-            </Toolbar>
-            <Toolbar>
-                <ScrollTab metrics={metrics}/>
             </Toolbar>
         </AppBar>
     )

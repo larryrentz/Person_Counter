@@ -2,14 +2,13 @@ import './App.css';
 import React, { useState } from 'react';
 import MainAppBar from './components/layout/MainAppBar';
 import ScrollView from './components/layout/ScrollView';
+import ScrollTab from './components/layout/ScrollTab'
 
 import { Container, Box, Grid} from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 const useStyles = makeStyles({
   root: {
     background: '#e8e8e8',
-    // minHeight: '160vh',
-    // maxWidth: '100vw',
   },
   content:{
     background: '#fff',
@@ -18,6 +17,9 @@ const useStyles = makeStyles({
     padding: '32px 0'
   },
   mainAppBar: {
+    
+  },
+  navBar: {
     
   }
 });
@@ -72,10 +74,13 @@ function App() {
     <div className="App" style={{ background: '#e8e8e8'}}>
       <Grid container className={classes.root} direction="column">
         <Grid item>
-          <MainAppBar id="top" className={classes.mainAppBar} metrics={state.metrics} />
+          <MainAppBar id="top" className={classes.mainAppBar} metrics={state.metrics}/>
+        </Grid>
+        <Grid item>
+          <ScrollTab metrics={state.metrics}/>
         </Grid>
         <Grid container item className={classes.content} alignItems="stretch" justify="center">
-          <ScrollView metrics={state.metrics}/>
+          <ScrollView className={classes.navBar} metrics={state.metrics}/>
         </Grid>
       </Grid>
     </div>

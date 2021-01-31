@@ -20,7 +20,7 @@ function ScrollView({metrics}) {
     })
     return(
         <React.Fragment>
-            { items}
+            {items}
         </React.Fragment>
     )
 }
