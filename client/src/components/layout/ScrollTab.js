@@ -10,10 +10,9 @@ const useStyles = makeStyles((theme) => ({
         background: '#e8e8e8',
         boxShadow: '9px 9px 18px #9e9e9e, -4px -4px 16px #ffffff',
         overflow: 'hidden',
-        margin: '16px auto',
+        margin: '10px auto 12px auto',
         maxWidth: '90vw',
-        position: 'sticky',
-        // top: '100px',
+        position: 'static'
         
     },
 }));

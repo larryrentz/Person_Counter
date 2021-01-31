@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Fab, Button, IconButton, Typography, AppBar, Toolbar, Grid } from '@material-ui/core';
-import { Schedule, Timelapse, Group } from '@material-ui/icons';
+import { Schedule, Timelapse, Group, PersonAdd } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles({
@@ -20,16 +20,28 @@ const useStyles = makeStyles({
     },
 });
 
-function MainAppBar({metrics}) {
+function MainAppBar({inQueue, toggleQueueStatus}) {
     const classes = useStyles();
+    const isInQueue = (inQueue) => {
+        let color = "";
+        let text = ""
+        if(!inQueue){
+            color = "primary";
+            text = "In Queue"
+        }
+        return(
+            <Fab className={classes.fab} color={color} variant="rounded" onClick={toggleQueueStatus}>
+                <PersonAdd/>
+                <Typography>{text}</Typography>
+            </Fab>
+        )
+    };
     return (
         <AppBar className={classes.root} position="static">
             <Toolbar style={{marginBottom: '20px'}}>
                 <Grid container justify="space-between" alignItems="center">
                     <Grid item>
-                        <Fab className={classes.fab} variant="rounded">
-                            <Schedule />
-                        </Fab>
+                        {isInQueue(inQueue)}
                     </Grid>
                     <Grid item>
                         <IconButton aria-label="Group">

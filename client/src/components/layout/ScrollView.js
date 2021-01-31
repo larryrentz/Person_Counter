@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import MetricCard from '../MetricCard'
+import QueueForm from './QueueForm';
 
 import { Grid, Box } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
@@ -20,6 +21,11 @@ function ScrollView({metrics}) {
     })
     return(
         <React.Fragment>
+            <Grid item className={classes.root} xs={10} s={10} md={10}>
+
+                <QueueForm />
+
+            </Grid>
             {items}
         </React.Fragment>
     )
